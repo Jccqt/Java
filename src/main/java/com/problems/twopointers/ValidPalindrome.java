@@ -26,20 +26,28 @@ public class ValidPalindrome {
 	// Time Complexity: O(n)
 	// Space Complexity: O(n)
 	public boolean IsPalindrome(String s) {
-		String word = "";
+		int left = 0;
+		int right = s.length() - 1;
 		
-		for(char c : s.toCharArray()) {
-			if(Character.isLetterOrDigit(c)) {
-				word += Character.toString(c).toLowerCase();
+		while(left < right) {
+			if(!Character.isLetter(s.charAt(left))) {
+				left++;
+				continue;
 			}
+			
+			if(!Character.isLetter(s.charAt(right))) {
+				right--;
+				continue;
+			}
+			
+			if(s.toLowerCase().charAt(left) != s.toLowerCase().charAt(right)) {
+				return false;
+			}
+			
+			left++;
+			right--;
 		}
 		
-		StringBuilder builder = new StringBuilder(word);
-		
-		if(word.equals(builder.reverse().toString())) {
-			return true;
-		}
-		
-		return false;
+		return true;
 	}
 }
